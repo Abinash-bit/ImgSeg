@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Website</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+</head>
+<body>
+
+    <section id="Home">
+        <nav>
+            <div class="logo">
+                <img src="image/Group 20.png">
+            </div>
+
+            <ul>
+                <li><a href="#Home">Home</a></li>
+                <li><a href="#Upload">Upload</a></li>
+                <li><a href="#Preview">Preview</a></li>
+                <li><a href="#Gallary">Search</a></li>
+                <li><a href="#Review">Album</a></li>
+                <li><a href="#Order">Replace</a></li>
+            </ul>
+
+            
+
+        </nav>
+
+        <div class="main">
+
+            <div class="men_text">
+                <h1>Design your rooms using<br><span>ImgSeg</span></h1>
+            </div>
+
+            <div class="main_image">
+                <img src="image/1_GFL-KOxw7O-BT4TsEa0crg.jpg">
+            </div>
+
+        </div>
+
+        <p>
+
+        </p>
+
+        <div class="main_btn">
+            <a href="#">Start now</a>
+            <i class="fa-solid fa-angle-right"></i>
+        </div>
+
+    </section>
+
+
+
+    <!--About-->
+
+    <div class="about" id="Upload">
+        <div class="about_main">
+
+            <div class="image">
+                <img src="image/Objects (1).png">
+            </div>
+
+            <h2>File Upload & Image Preview</h2>
+            <p class="lead">No Plugins <b>Just Javascript</b></p>
+
+            <!-- Upload  -->
+            <form id="file-upload-form" class="uploader">
+               <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+
+               <label for="file-upload" id="file-drag">
+                 <img id="file-image" src="#" alt="Preview" class="hidden">
+                 <div id="start">
+                     <i class="fa fa-download" aria-hidden="true"></i>
+                     <div>Select a file or drag here</div>
+                     <div id="notimage" class="hidden">Please select an image</div>
+                     <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+                </div>
+                <div id="response" class="hidden">
+                  <div id="messages"></div>
+                  <progress class="progress" id="file-progress" value="0">
+                    <span>0</span>%
+                  </progress>
+                </div>
+              </label>
+            </form>
+
+            <script>
+                document.getElementById('file-upload').addEventListener('change', function (e) {
+                    var file = e.target.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function (event) {
+                        var imgElement1 = document.getElementById('uploaded-image-1');
+                        var imgElement2 = document.getElementById('uploaded-image-2');
+                        imgElement1.src = event.target.result;
+                        imgElement2.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                });
+            </script>
+
+
+
+        </div>
+
+        <a href="#" class="about_btn">Start now</a>
+
+    </div>
+
+    
+ <div class="about" id="#Preview">
+        <div class="frames-container">
+            <div class="frame">
+                <img id="uploaded-image-1" alt="uploaded-image-1">
+                
+
+            </div>
+            
+
+            <div class="frame1">
+                <img src="" alt="Nature">
+                <button class="selected-object-btn">Selected Object</button>
+            </div>
+        </div>
+ </div>
+
+
+
+    
+
+
+
+    <!--Menu-->
+
+    <div class="menu" id="Menu">
+        <h1>Search<span>Objects </span> from your vendors</h1>
+
+        <body>
+            <form class="search-container">
+              <input type="text" id="search-bar" placeholder="What can I help you with today?">
+              <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></a>
+            </form>
+        </body>
+
+
+
+        <div class="menu_box">
+            <div class="menu_card">
+
+                <div class="menu_image">
+                    <img src="image/7.avif">
+                </div>
+
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="menu_info">
+                    <h2>Chair</h2>
+
+                </div>
+
+            </div> 
+            
+            <div class="menu_card">
+
+                <div class="menu_image">
+                    <img src="image/8.avif">
+                </div>
+
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="menu_info">
+                    <h2>Chair</h2>
+              
+                </div>
+
+            </div> 
+
+            <div class="menu_card">
+
+                <div class="menu_image">
+                    <img src="image/9.avif">
+                </div>
+
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="menu_info">
+                    <h2>Chair</h2>
+
+                </div>
+
+            </div> 
+
+            <div class="menu_card">
+
+                <div class="menu_image">
+                    <img src="image/10.avif">
+                </div>
+
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="menu_info">
+                    <h2>Chair</h2>
+
+                </div>
+
+            </div> 
+
+            <div class="menu_card">
+
+                <div class="menu_image">
+                    <img src="image/7.avif">
+                </div>
+
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="menu_info">
+                    <h2>Chair</h2>
+
+                </div>
+
+            </div> 
+
+            <div class="menu_card">
+
+                <div class="menu_image">
+                    <img src="image/8.avif">
+                </div>
+
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="menu_info">
+                    <h2>chair</h2>
+
+                </div>
+
+            </div> 
+
+            <div class="menu_card">
+
+                <div class="menu_image">
+                    <img src="image/9.avif">
+                </div>
+
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="menu_info">
+                    <h2>Chair</h2>
+
+                </div>
+
+            </div> 
+
+            <div class="menu_card">
+
+                <div class="menu_image">
+                    <img src="image/10.avif">
+                </div>
+
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="menu_info">
+                    <h2>Chair</h2>
+
+                </div>
+
+            </div> 
+
+            <div class="menu_card">
+
+                <div class="menu_image">
+                    <img src="image/1.webp">
+                </div>
+
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="menu_info">
+                    <h2>Chair</h2>
+
+                </div>
+
+            </div> 
+
+            <div class="menu_card">
+
+                <div class="menu_image">
+                    <img src="image/2.webp">
+                </div>
+
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="menu_info">
+                    <h2>Chair</h2>
+
+                </div>
+
+            </div> 
+
+            <div class="menu_card">
+
+                <div class="menu_image">
+                    <img src="image/3.webp">
+                </div>
+
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="menu_info">
+                    <h2>Chair</h2>
+
+                </div>
+
+            </div> 
+
+            <div class="menu_card">
+
+                <div class="menu_image">
+                    <img src="image/4.avif">
+                </div>
+
+                <div class="small_card">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="menu_info">
+                    <h2>Chair</h2>
+ 
+                </div>
+
+            </div> 
+            
+        </div>
+
+    </div>
+
+
+
+
+    <!--Gallary-->
+
+    <div class="gallary" id="Gallary">
+        <h1>Our<span>Album</span></h1>
+
+        <div class="gallary_image_box">
+            <div class="gallary_image">
+                <img src="image/6.avif">
+
+                <h3>Sofa</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi sint eveniet laboriosam 
+                </p>
+                <a href="#" class="gallary_btn">Order Now</a>
+            </div>
+
+            <div class="gallary_image">
+                <img src="image/1.webp">
+
+                <h3>Sofa</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi sint eveniet laboriosam 
+                </p>
+                <a href="#" class="gallary_btn">Order Now</a>
+            </div>
+
+            <div class="gallary_image">
+                <img src="image/2.webp">
+
+                <h3>Sofa</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi sint eveniet laboriosam 
+                </p>
+                <a href="#" class="gallary_btn">Order Now</a>
+            </div>
+
+            <div class="gallary_image">
+                <img src="image/3.webp">
+
+                <h3>Sofa</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi sint eveniet laboriosam 
+                </p>
+                <a href="#" class="gallary_btn">Order Now</a>
+            </div>
+
+            <div class="gallary_image">
+                <img src="image/4.avif">
+
+                <h3>Sofa</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi sint eveniet laboriosam 
+                </p>
+                <a href="#" class="gallary_btn">Order Now</a>
+            </div>
+
+            <div class="gallary_image">
+                <img src="image/5.avif">
+
+                <h3>Sofa</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi sint eveniet laboriosam 
+                </p>
+                <a href="#" class="gallary_btn">Order Now</a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="about" id="About">
+        <div class="about_main">
+
+        
+
+            <h2>File Upload & Image Preview</h2>
+            <p class="lead">No Plugins <b>Just Javascript</b></p>
+
+            <!-- Upload  -->
+            <form id="file-upload-form" class="uploader">
+               <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+
+               <label for="file-upload" id="file-drag">
+                 <img id="file-image" src="#" alt="Preview" class="hidden">
+                 <div id="start">
+                     <i class="fa fa-download" aria-hidden="true"></i>
+                     <div>Select a file or drag here</div>
+                     <div id="notimage" class="hidden">Please select an image</div>
+                     <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+                </div>
+                <div id="response" class="hidden">
+                  <div id="messages"></div>
+                  <progress class="progress" id="file-progress" value="0">
+                    <span>0</span>%
+                  </progress>
+                </div>
+              </label>
+            </form>
+
+
+            <div class="frames-container">
+                <div class="frame">
+                    <img src="image/1_GFL-KOxw7O-BT4TsEa0crg.jpg" alt="Nature">
+                    <button class="uploaded-image-btn">Selected Object</button>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <a href="#" class="about_btn">Process Image</a>
+
+        <div class="frames-container">
+            <div class="frame">
+                <img src="image/1_GFL-KOxw7O-BT4TsEa0crg.jpg" alt="Nature">
+                <button class="uploaded-image-btn">Uploaded Image</button>
+            </div>
+            
+    
+            <div class="frame1">
+                <img src="image/1_GFL-KOxw7O-BT4TsEa0crg.jpg" alt="Nature">
+                <button class="selected-object-btn">Designed Image</button>
+            </div>
+        </div>
+
+        
+
+
+
+
+    </div>
+
