@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Fetcher</title>
+</head>
+<body>
+  <input type="file" id="baseImageInput" accept="image/*">
+  <input type="file" id="baseMaskInput" accept="image/*">
+  <input type="file" id="refImageInput" accept="image/*">
+  <input type="file" id="refMaskInput" accept="image/*">
+  <button onclick="uploadAndFetchImages()">Upload & Fetch Images</button>
+  <br>
+  <img id="resultImage" src="" alt="Result Image">
+  
+  <script>
+    function uploadAndFetchImages() {
+      const baseImage = document.getElementById('baseImageInput').files[0];
+      const baseMask = document.getElementById('baseMaskInput').files[0];
+      const refImage = document.getElementById('refImageInput').files[0];
+      const refMask = document.getElementById('refMaskInput').files[0];
+
+      if (!baseImage || !baseMask || !refImage || !refMask) {
+        alert("Please select all four images.");
+        return;
+      }
+
+      const formdata = new FormData();
+      formdata.append("base_image", baseImage, baseImage.name);
+      formdata.append("base_mask", baseMask, baseMask.name);
+      formdata.append("ref_image", refImage, refImage.name);
+      formdata.append("ref_mask", refMask, refMask.name);
+
+      const requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+      };
+
+      fetch("http://18.189.132.140:5000/synthesize", requestOptions)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok.');
+          }
+          return response.blob();
+        })
+        .then(result => {
+          const resultImageElement = document.getElementById('resultImage');
+          const resultImageUrl = URL.createObjectURL(result);
+          resultImageElement.src = resultImageUrl;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+  </script>
+</body>
+</html>
+

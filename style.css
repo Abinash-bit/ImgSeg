@@ -1037,7 +1037,6 @@ p {
 .frame1 {
     width: 500px;
     height: 500px;
-    border: 3px solid #0053cc;
     background: #eee;
     padding: 15px 10px;
     box-sizing: border-box;
@@ -1117,7 +1116,18 @@ input#search-bar{
     right: -20px;
 }
 
+.frame {
+    position: relative;
+    display: inline-block;
+  }
+  .frame img {
+    max-width: 100%;
+    height: auto;
+  }
 
+  #coordinates {
+    margin-top: 10px;
+  }
 
   
 

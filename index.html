@@ -7,8 +7,7 @@
     <title>ImgSeg</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+
 </head>
 <body>
 
@@ -65,8 +64,7 @@
                 <img src="image/Objects (1).png">
             </div>
 
-            <h2>File Upload & Image Preview</h2>
-            <p class="lead">No Plugins <b>Just Javascript</b></p>
+            
 
             <!-- Upload  -->
             <form id="file-upload-form" class="uploader">
@@ -95,9 +93,9 @@
                     var reader = new FileReader();
                     reader.onload = function (event) {
                         var imgElement1 = document.getElementById('uploaded-image-1');
-                        var imgElement2 = document.getElementById('uploaded-image-2');
+                        
                         imgElement1.src = event.target.result;
-                        imgElement2.src = event.target.result;
+                        
                     };
                     reader.readAsDataURL(file);
                 });
@@ -107,7 +105,7 @@
 
         </div>
 
-        <a href="#" class="about_btn">Start now</a>
+        
 
     </div>
 
@@ -115,18 +113,86 @@
  <div class="about" id="#Preview">
         <div class="frames-container">
             <div class="frame">
-                <img id="uploaded-image-1" alt="uploaded-image-1">
                 
-
+                <img id="uploaded-image-1" alt="uploaded-image-1">
+                <button onclick=uploadImage()>fetch masked image</button>
+                      
             </div>
             
 
             <div class="frame1">
-                <img src="" alt="Nature">
-                <button class="selected-object-btn">Selected Object</button>
+                <img id="maskedImage" src="" alt="Nature">
+                
             </div>
         </div>
  </div>
+
+ <p id="coordDisplay">Clicked coordinates will appear here</p>
+
+ <script>
+    let x = 0;
+    let y = 0;
+    document.getElementById('uploaded-image-1').addEventListener('load', function() {
+      const img = document.getElementById('uploaded-image-1');
+  
+      img.addEventListener('click', function(event) {
+        const rect = img.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+  
+        console.log(`Clicked coordinates - X: ${x}, Y: ${y}`);
+        document.getElementById('coordDisplay').innerText = `X: ${x*0.4}, Y: ${y*0.4}`;
+      });
+    });
+  
+    document.getElementById('file-upload').addEventListener('change', function (e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+      reader.onload = function (event) {
+        var imgElement1 = document.getElementById('uploaded-image-1');
+        imgElement1.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+
+
+
+    function uploadImage() {
+      const fileInput = document.getElementById('file-upload');
+      const file = fileInput.files[0];
+
+      if (!file) {
+        alert("Please select an image.");
+        return;
+      }
+
+      const formdata = new FormData();
+      formdata.append("image", file, "[PROXY]");
+      formdata.append("point", `92,103`);
+
+
+      const requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+      };
+
+      fetch("http://18.189.132.140:4000/process_image", requestOptions)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok.');
+          }
+          return response.blob();
+        })
+        .then(result => {
+          const maskedImageElement = document.getElementById('maskedImage');
+          const maskedImageUrl = URL.createObjectURL(result);
+          maskedImageElement.src = maskedImageUrl;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+  </script>
 
 
 
@@ -433,40 +499,9 @@
 
     <div class="about" id="About">
         <div class="about_main">
-
-        
-
-            <h2>File Upload & Image Preview</h2>
-            <p class="lead">No Plugins <b>Just Javascript</b></p>
-
-            <!-- Upload  -->
-            <form id="file-upload-form" class="uploader">
-               <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
-
-               <label for="file-upload" id="file-drag">
-                 <img id="file-image" src="#" alt="Preview" class="hidden">
-                 <div id="start">
-                     <i class="fa fa-download" aria-hidden="true"></i>
-                     <div>Select a file or drag here</div>
-                     <div id="notimage" class="hidden">Please select an image</div>
-                     <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
-                </div>
-                <div id="response" class="hidden">
-                  <div id="messages"></div>
-                  <progress class="progress" id="file-progress" value="0">
-                    <span>0</span>%
-                  </progress>
-                </div>
-              </label>
-            </form>
+            
 
 
-            <div class="frames-container">
-                <div class="frame">
-                    <img src="image/1_GFL-KOxw7O-BT4TsEa0crg.jpg" alt="Nature">
-                    <button class="uploaded-image-btn">Selected Object</button>
-                </div>
-            </div>
 
 
 
